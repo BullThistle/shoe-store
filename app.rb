@@ -45,6 +45,20 @@ get '/brands/:id' do
 end
 
 get '/add_store' do
-
   erb :add_store
+end
+
+post '/add_store' do
+  name = params.fetch 'name'
+
+  store = Store.create({:name => name})
+
+  brands = params.fetch('brands').split(', ')
+  brands.each do |brand|
+    bran = Brand.find_or_initialize_by name: brand
+    bran.save
+    store.brands.push(bran)
+  end
+
+  redirect '/stores'
 end
