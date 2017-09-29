@@ -19,8 +19,19 @@ get '/stores' do
 end
 
 get '/add_brand' do
+  name = params.fetch 'name'
+  price = params.fetch 'price'
 
-  erb :add_brand
+  brand = Brand.create({:name => name, :price => price})
+
+  stores = params.fetch('stores').split(', ')
+  stores.each do |store|
+    stor = Store.find_or_initialize_by name: store
+    stor.save
+    brand.stores.push(stor)
+  end
+
+  redirect '/brands'
 end
 
 get '/add_store' do
