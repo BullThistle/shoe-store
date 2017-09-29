@@ -5,7 +5,6 @@ class Brand < ActiveRecord::Base
   validates_presence_of :price
 
   before_save(:upcase_name)
-  before_save(:upcase_name)
 
   private
     def upcase_name
