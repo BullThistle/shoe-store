@@ -66,6 +66,20 @@ post '/stores/:id' do
   erb :store
 end
 
+post '/brands/:id' do
+  @brand = Brand.find(params.fetch('id').to_i)
+
+  stores = params.fetch('stores').split(', ')
+
+  stores.each do |store|
+    stor = Store.find_or_initialize_by name: store
+    stor.save
+    @brand.stores.push(stor)
+  end
+  @stores = @brand.stores
+  erb :brand
+end
+
 delete '/stores/:id' do
   store = Store.find(params.fetch(:id).to_i)
   store.destroy

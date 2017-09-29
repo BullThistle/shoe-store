@@ -8,3 +8,10 @@
   <% end %>
 </ul>
 <p>Add carriers: </p>
+<form action="/brands/<%= @brand.id %>" method="post">
+  <input type="text" name="stores" id="stores">
+  <label for="stores">Stores (seperated by commas)</label>
+  <br>
+  <br>
+  <button class="btn" type="submit">Add Stores</button>
+</form>
