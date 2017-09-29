@@ -50,6 +50,28 @@ get '/stores/:id' do
   erb :store
 end
 
+post '/stores/:id' do
+  @store = Store.find(params.fetch('id').to_i)
+
+  name = params.fetch 'name'
+  brands = params.fetch('brands').split(', ')
+
+  @store.update({:name => name})
+  brands.each do |brand|
+    bran = Brand.find_or_initialize_by name: brand
+    bran.save
+    @store.brands.push(bran)
+  end
+  @brands = @store.brands
+  erb :store
+end
+
+delete '/stores/:id' do
+  store = Store.find(params.fetch(:id).to_i)
+  store.destroy
+  redirect '/stores'
+end
+
 get '/add_store' do
   erb :add_store
 end
