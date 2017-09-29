@@ -10,6 +10,10 @@
   <br>
   <% end %>
 </ul>
+<form action="/brands/<%= @brand.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn" type="submit" name="button">Delete Brand</button>
+</form>
 <p>Add carriers: </p>
 <form action="/brands/<%= @brand.id %>" method="post">
   <input type="text" name="stores" id="stores">

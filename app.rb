@@ -26,7 +26,10 @@ post '/add_brand' do
   name = params.fetch 'name'
   price = params.fetch 'price'
 
-  brand = Brand.create({:name => name, :price => price})
+
+  brand = Brand.find_or_initialize_by name: name
+  brand.save
+  brand.update({:price => price})
 
   stores = params.fetch('stores').split(', ')
   stores.each do |store|
@@ -86,6 +89,12 @@ delete '/stores/:id' do
   redirect '/stores'
 end
 
+delete '/brands/:id' do
+  brand = Brand.find(params.fetch(:id).to_i)
+  brand.destroy
+  redirect '/brands'
+end
+
 get '/add_store' do
   erb :add_store
 end
@@ -93,7 +102,8 @@ end
 post '/add_store' do
   name = params.fetch 'name'
 
-  store = Store.create({:name => name})
+  store = Store.find_or_initialize_by name: name
+  store.save
 
   brands = params.fetch('brands').split(', ')
   brands.each do |brand|
