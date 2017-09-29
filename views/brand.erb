@@ -1,0 +1,9 @@
+<h1><%= @brand.name %></h1>
+<hr>
+<p>Carried by: </p>
+<ul>
+  <% @stores.each do |store| %>
+  <li><a href="/stores/<%= store.id %>"><%= store.name %></a></li>
+  <br>
+  <% end %>
+</ul>

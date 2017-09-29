@@ -38,6 +38,12 @@ post '/add_brand' do
   redirect '/brands'
 end
 
+get '/brands/:id' do
+  @brand = Brand.find(params.fetch('id').to_i)
+  @stores = @brand.stores
+  erb :brand
+end
+
 get '/add_store' do
 
   erb :add_store
