@@ -44,6 +44,12 @@ get '/brands/:id' do
   erb :brand
 end
 
+get '/stores/:id' do
+  @store = Store.find(params.fetch('id').to_i)
+  @brands = @store.brands
+  erb :store
+end
+
 get '/add_store' do
   erb :add_store
 end
