@@ -19,6 +19,10 @@ get '/stores' do
 end
 
 get '/add_brand' do
+  erb :add_brand
+end
+
+post '/add_brand' do
   name = params.fetch 'name'
   price = params.fetch 'price'
 
