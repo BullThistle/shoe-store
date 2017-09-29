@@ -1,4 +1,7 @@
 <h1><%= @brand.name %></h1>
+<% if @brand.price %>
+  <p><%= @brand.price %></p>
+<% end %>
 <hr>
 <p>Carried by: </p>
 <ul>

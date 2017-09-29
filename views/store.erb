@@ -4,6 +4,9 @@
 <ul>
   <% @brands.each do |brand| %>
   <li><a href="/brands/<%= brand.id %>"><%= brand.name %></a></li>
+  <% if brand.price %>
+    <%= brand.price %>
+  <% end %>
   <br>
   <% end %>
 </ul>
