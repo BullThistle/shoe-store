@@ -9,7 +9,7 @@ get '/' do
 end
 
 get '/brands' do
-
+  @brands = Brand.all
   erb :brands
 end
 
