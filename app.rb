@@ -14,7 +14,7 @@ get '/brands' do
 end
 
 get '/stores' do
-
+  @stores = Store.all
   erb :stores
 end
 
