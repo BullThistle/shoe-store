@@ -6,10 +6,6 @@ describe 'Store' do
       store = Store.new({name: ''})
       expect(store.save).to(eq(false))
     end
-    it 'does not allow store name to be more than 100 characters' do
-      store = Store.new({name: 'storestorestorestorestorestorestorestorestorestorestorestorestorestorestorestorestorestorestorestore'})
-      expect(store.save).to(eq(false))
-    end
     it 'does not allow duplicate stores' do
       Store.create({name: 'store'})
       store = Store.new({name: 'store'})

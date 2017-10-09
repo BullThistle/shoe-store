@@ -19,10 +19,6 @@ describe 'Brand' do
       brand = Brand.new({name: brand, price: 100})
       expect(brand.save).to(eq(false))
     end
-    it 'converts price to currency formatting' do
-      brand = Band.new({name: 'brand', price: 100})
-      expect(brand.price).to(eq('$100.00'))
-    end
   end
   describe '#capitalize_brand' do
     it 'capitalizes each word in brand name before saving' do
