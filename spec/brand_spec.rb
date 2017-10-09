@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe 'Brand' do
   describe '#save' do
-    it('does not create brand if no input for name is present') do
+    it 'does not create brand if no input for name is present' do
       brand = Brand.new({name: '', price: 100})
       expect(brand.save).to(eq(false))
     end
-    it('does not create brand if no input for name is present') do
+    it 'does not create brand if no input for price is present' do
       brand = Brand.new({name: 'brand', price: nil})
       expect(brand.save).to(eq(false))
     end
