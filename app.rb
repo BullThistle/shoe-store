@@ -23,9 +23,10 @@ get '/add_brand' do
 end
 
 post '/add_brand' do
-  name = params.fetch 'name'
+  name = params.fetch('name').split(/ |\_/).map(&:capitalize).join(" ")
   price = params.fetch 'price'
-
+  price = ('%.2f' % price).to_s
+  price[/\A/] = "$"
 
   brand = Brand.find_or_initialize_by name: name
   brand.save
@@ -33,6 +34,7 @@ post '/add_brand' do
 
   stores = params.fetch('stores').split(', ')
   stores.each do |store|
+    store = store.split(/ |\_/).map(&:capitalize).join(" ")
     stor = Store.find_or_initialize_by name: store
     stor.save
     brand.stores.push(stor)
@@ -56,11 +58,12 @@ end
 post '/stores/:id' do
   @store = Store.find(params.fetch('id').to_i)
 
-  name = params.fetch 'name'
+  name = params.fetch('name').split(/ |\_/).map(&:capitalize).join(" ")
   brands = params.fetch('brands').split(', ')
 
   @store.update({:name => name})
   brands.each do |brand|
+    brand = brand.split(/ |\_/).map(&:capitalize).join(" ")
     bran = Brand.find_or_initialize_by name: brand
     bran.save
     @store.brands.push(bran)
@@ -75,6 +78,7 @@ post '/brands/:id' do
   stores = params.fetch('stores').split(', ')
 
   stores.each do |store|
+    store = store.split(/ |\_/).map(&:capitalize).join(" ")
     stor = Store.find_or_initialize_by name: store
     stor.save
     @brand.stores.push(stor)
@@ -100,13 +104,14 @@ get '/add_store' do
 end
 
 post '/add_store' do
-  name = params.fetch 'name'
+  name = params.fetch('name').split(/ |\_/).map(&:capitalize).join(" ")
 
   store = Store.find_or_initialize_by name: name
   store.save
 
   brands = params.fetch('brands').split(', ')
   brands.each do |brand|
+    brand = brand.split(/ |\_/).map(&:capitalize).join(" ")
     bran = Brand.find_or_initialize_by name: brand
     bran.save
     store.brands.push(bran)

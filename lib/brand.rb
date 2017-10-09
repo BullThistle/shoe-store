@@ -8,5 +8,6 @@ class Brand < ActiveRecord::Base
   private
     def upcase_name
       self.name.split(/ |\_/).map(&:capitalize).join(" ")
+      binding.pry
     end
 end
